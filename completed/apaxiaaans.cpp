@@ -5,7 +5,6 @@ int main()
 {
     string name;
     string output = "";
-    freopen("input.txt", "r", stdin);
     cin >> name;
     for (int i = 0; i < name.length(); i++)
     {
