@@ -4,7 +4,6 @@ using namespace std;
 
 int main()
 {
-    freopen("input.txt", "r", stdin);
     string l1, l2, l3, l4, l5, l6;
     map<string, int> patterns;
     patterns["*** | * * | * * | * * | *** | "] = 0;

@@ -3,8 +3,7 @@ using namespace std;
 
 int main()
 {
-    int n;
-    freopen("input.txt", "r", stdin);
-
+    string str = "abcd def";
+    cout << str.substr(0, 2);
     return 0;
 }
