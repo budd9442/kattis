@@ -5,52 +5,43 @@ using namespace std;
 int main()
 {
     freopen("input.txt", "r", stdin);
-    string l1, l2, l3, l4, l5, l6;
-    map<string, int> patterns;
-    patterns["*** | * * | * * | * * | *** | "] = 0;
-    patterns["  * |   * |   * |   * |   * | "] = 1;
-    patterns["*** |   * | *** | *   | *** | "] = 2;
-    patterns["*** |   * | *** |   * | *** | "] = 3;
-    patterns["* * | * * | *** |   * |   * | "] = 4;
-    patterns["*** | *   | *** |   * | *** | "] = 5;
-    patterns["*** | *   | *** | * * | *** | "] = 6;
-    patterns["*** |   * |   * |   * |   * | "] = 7;
-    patterns["*** | * * | *** | * * | *** | "] = 8;
-    patterns["*** | * * | *** |   * | *** | "] = 9;
-
-    getline(cin, l1);
-    getline(cin, l2);
-    getline(cin, l3);
-    getline(cin, l4);
-    getline(cin, l5);
-
-    int n = (l1.length() + 1) / 4;
-
-    vector<string> numbers;
-    string num = "";
+    int m, n, temp, maxx = 0;
+    cin >> m >> n;
+    set<int> all_numbers;
+    vector<int> current;
     for (int i = 0; i < n; i++)
     {
-        numbers.push_back("");
-        numbers[i].append(l1.substr(4 * i, 3) + " | ");
-        numbers[i].append(l2.substr(4 * i, 3) + " | ");
-        numbers[i].append(l3.substr(4 * i, 3) + " | ");
-        numbers[i].append(l4.substr(4 * i, 3) + " | ");
-        numbers[i].append(l5.substr(4 * i, 3) + " | ");
-        if (patterns.find(numbers[i]) == patterns.end())
+        cin >> temp;
+        current.push_back(temp);
+        maxx = max(maxx, temp);
+    }
+    for (int j = 0; j < m; j++)
+    {
+        all_numbers.insert(j + 1);
+    }
+    for (int item : current)
+    {
+        all_numbers.erase(item);
+    }
+    for (int x : all_numbers)
+    {
+        if (x > maxx)
         {
-            printf("BOOM!!");
-            return 0;
+            current.push_back(x);
         }
-        num += to_string(patterns[numbers[i]]);
+        for (int y = 0; y < current.size(); y++)
+        {
+            if (current[y] > x)
+            {
+                current.insert(current.begin() + y, x);
+                break;
+            }
+        }
+        }
+    for (int y : current)
+    {
+        cout << y << endl;
     }
 
-    if (stoi(num) % 6 == 0)
-    {
-        printf("BEER!!");
-    }
-    else
-    {
-        printf("BOOM!!");
-    }
     return 0;
 }
